@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@dice-roller/rpg-dice-roller": "^5.1.0",
     "discord.js": "^14.3.0"
   }
 }

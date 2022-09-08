@@ -1,0 +1,14 @@
+{
+  "name": "savager-bot",
+  "version": "0.0.1",
+  "description": "A quick and dirty discord bot for the Savage Worlds tabletop RPG",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.3.0"
+  }
+}

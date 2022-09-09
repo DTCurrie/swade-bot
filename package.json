@@ -4,12 +4,22 @@
   "description": "A quick and dirty discord bot for the Savage Worlds tabletop RPG",
   "main": "index.js",
   "scripts": {
+    "start": "node deploy-commands.js && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@dice-roller/rpg-dice-roller": "^5.1.0",
-    "discord.js": "^14.3.0"
+    "@discordjs/rest": "^1.1.0",
+    "discord-api-types": "^0.37.8",
+    "discord.js": "^14.3.0",
+    "eslint-config-xo": "^0.42.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0"
   }
 }

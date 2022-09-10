@@ -6,3 +6,4 @@
 4. Start local bot (points to our discord server as the `guild`) with `npm start`
 5. Deploy commands with `npm deploy-commands`
 6. Interactions are logged to the `console`
+7. Development commands will have a `-dev` suffix (in our discord server)

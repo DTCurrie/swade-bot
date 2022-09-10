@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npm-watch dev",
-    "dev": "node ./index.js",
+    "dev": "npm run deploy-commands && npm run bot",
+    "bot": "node ./index.js",
     "deploy-commands": "node deploy-commands.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -32,7 +33,8 @@
       ],
       "extensions": "js",
       "ignore": "./deploy-commands",
-      "runOnChangeOnly": false
+      "runOnChangeOnly": false,
+      "delay": 2500
     }
   }
 }

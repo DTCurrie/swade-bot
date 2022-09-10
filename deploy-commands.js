@@ -19,11 +19,16 @@ const rest = new REST({version: '10'}).setToken(token);
 (async () => {
 	try {
 		if (process.env === 'production') {
+			// Uncomment this to delete commands, leaving the `body` array empty deletes all of them
+			// await rest.put(Routes.applicationCommands(clientId), {body: []});
+
 			const data = await rest.put(Routes.applicationCommands(clientId), {body: commands});
 			console.log(`Successfully registered ${data.length} global application commands.`);
 			return;
 		}
 
+		// Uncomment this to delete commands, leaving the `body` array empty deletes all of them
+		// await rest.put(Routes.applicationGuildCommands(clientId, guildId), {body: []});
 		const data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), {body: commands});
 		console.log(`Successfully registered ${data.length} guild application commands.`);
 	} catch (err) {

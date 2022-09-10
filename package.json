@@ -4,7 +4,8 @@
   "description": "A quick and dirty discord bot for the Savage Worlds tabletop RPG",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "npm-watch dev",
+    "dev": "node ./index.js",
     "deploy-commands": "node deploy-commands.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +22,17 @@
     "eslint-config-xo": "^0.42.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0"
+    "eslint-plugin-promise": "^6.0.0",
+    "npm-watch": "^0.11.0"
+  },
+  "watch": {
+    "dev": {
+      "patterns": [
+        "**/*.js"
+      ],
+      "extensions": "js",
+      "ignore": "./deploy-commands",
+      "runOnChangeOnly": false
+    }
   }
 }

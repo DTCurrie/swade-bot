@@ -2,10 +2,13 @@ const {EmbedBuilder, SlashCommandBuilder} = require('discord.js');
 const {DiceRoll} = require('@dice-roller/rpg-dice-roller');
 
 const {addModifier} = require('../lib/add-modifier');
+const {log, error} = require('../lib/logger');
+
+const commandName = 'roll';
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('roll')
+		.setName(commandName)
 		.setDescription('Makes a standard dice roll!')
 		.addIntegerOption(option =>
 			option.setName('die')
@@ -19,15 +22,13 @@ module.exports = {
 		const die = interaction.options.getInteger('die');
 		const modifier = interaction.options.getString('modifier');
 
-		console.log('[roll] inputs:', {die, modifier});
+		log(commandName, 'inputs', {die, modifier});
 
 		const command = addModifier(`d${die}`, modifier);
-
-		console.log('[roll] command:', command);
+		log(commandName, 'command', command);
 
 		const roll = new DiceRoll(command);
-
-		console.log('[roll] roll:', roll.output);
+		log(commandName, 'roll', roll.output);
 
 		const embed = new EmbedBuilder()
 			.setColor(0x0099FF)
@@ -46,6 +47,10 @@ module.exports = {
 			)
 			.setTimestamp();
 
-		await interaction.reply({embeds: [embed]});
+		try {
+			await interaction.reply({embeds: [embed]});
+		} catch (err) {
+			error(commandName, 'error replying to interaction', err);
+		}
 	},
 };

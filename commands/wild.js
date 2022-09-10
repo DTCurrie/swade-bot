@@ -2,10 +2,13 @@ const {EmbedBuilder, SlashCommandBuilder} = require('discord.js');
 const {DiceRoll} = require('@dice-roller/rpg-dice-roller');
 
 const {addModifier} = require('../lib/add-modifier');
+const {log, error} = require('../lib/logger');
+
+const commandName = 'wild';
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('wild')
+		.setName(commandName)
 		.setDescription('Makes a wild card roll by adding an exploding d6!')
 		.addIntegerOption(option =>
 			option.setName('trait')
@@ -20,16 +23,15 @@ module.exports = {
 		const modifier = interaction.options.getString('modifier');
 
 		console.log('[wild] inputs:', {trait, modifier});
+		log(commandName, 'inputs', {trait, modifier});
 
 		const traitCommand = addModifier(`d${trait}!!`, modifier);
 		const wildCardCommand = addModifier('d6!!', modifier);
-
-		console.log('[wild] commands:', {traitCommand, wildCardCommand});
+		log(commandName, 'commands', {traitCommand, wildCardCommand});
 
 		const traitRoll = new DiceRoll(traitCommand);
 		const wildCardRoll = new DiceRoll(wildCardCommand);
-
-		console.log('[wild] rolls:', {traitRoll, wildCardRoll});
+		log(commandName, 'rolls', {traitRoll: traitRoll.output, wildCardRoll: wildCardRoll.output});
 
 		const embed = new EmbedBuilder()
 			.setColor(0x0099FF)
@@ -49,6 +51,10 @@ module.exports = {
 			)
 			.setTimestamp();
 
-		await interaction.reply({embeds: [embed]});
+		try {
+			await interaction.reply({embeds: [embed]});
+		} catch (err) {
+			error(commandName, 'error replying to interaction', err);
+		}
 	},
 };

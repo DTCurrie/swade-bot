@@ -16,10 +16,10 @@ dependencies:
   '@discordjs/rest': 1.1.0
   discord-api-types: 0.37.8
   discord.js: 14.3.0
-  eslint-config-xo: 0.42.0_eslint@8.23.0
 
 devDependencies:
   eslint: 8.23.0
+  eslint-config-xo: 0.42.0_eslint@8.23.0
   eslint-plugin-import: 2.26.0_eslint@8.23.0
   eslint-plugin-n: 15.2.5_eslint@8.23.0
   eslint-plugin-promise: 6.0.1_eslint@8.23.0
@@ -298,7 +298,7 @@ packages:
 
   /confusing-browser-globals/1.0.11:
     resolution: {integrity: sha512-JsPKdmh8ZkmnHxDk55FZ1TqVLvEQTvoByJZRN9jzI0UjxK/QgAmsphz7PGtqgPieQZ/CQcHWXCR7ATDNhGe+YA==}
-    dev: false
+    dev: true
 
   /cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -455,7 +455,7 @@ packages:
     dependencies:
       confusing-browser-globals: 1.0.11
       eslint: 8.23.0
-    dev: false
+    dev: true
 
   /eslint-import-resolver-node/0.3.6:
     resolution: {integrity: sha512-0En0w03NRVMn9Uiyn8YRPDKvWjxCWkslUEhGNTdGx15RvPJYQ+lbOlqrlNI2vEAs4pDYK4f/HN2TbDmk5TP0iw==}

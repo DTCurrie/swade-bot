@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>commands/wild.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-add-modifiers.html">add-modifiers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-add-modifiers.html#~addModifier">addModifier</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-base.html">base</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-base.html#~createBaseEmbed">createBaseEmbed</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-command-name.html">command-name</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-command-name.html#~createCommandName">createCommandName</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-extra.html">extra</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-extra.html#~handleExtraReroll">handleExtraReroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-extra.html#~handleExtraRoll">handleExtraRoll</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-logger.html">logger</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-logger.html#~error">error</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-logger.html#~info">info</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-logger.html#~log">log</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-logger.html#~output">output</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-logger.html#~warn">warn</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-result.html">result</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-result.html#~createResultEmbed">createResultEmbed</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-roll.html">roll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-roll.html#~handleReroll">handleReroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-roll.html#~handleRoll">handleRoll</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-rolls.html">rolls</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-rolls.html#~createRerollEmbed">createRerollEmbed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-rolls.html#~createRollEmbed">createRollEmbed</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-wild.html">wild</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-wild.html#~createWildCardRerollEmbed">createWildCardRerollEmbed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-wild.html#~createWildCardRollEmbed">createWildCardRollEmbed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-wild.html#~handleWilCardReroll">handleWilCardReroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-wild.html#~handleWilCardRoll">handleWilCardRoll</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">commands/wild.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A module for creating the `/wild` command for the bot.
+ * @module wild
+ */
+
+const {
+	ActionRowBuilder,
+	ButtonBuilder,
+	ButtonStyle,
+	SlashCommandBuilder,
+} = require('discord.js');
+
+const {DiceRoll} = require('@dice-roller/rpg-dice-roller');
+
+const {addModifier} = require('../lib/add-modifier');
+const {log, error} = require('../lib/logger');
+const {createCommandName} = require('../lib/command-name');
+const {createResultEmbed} = require('../embeds/result');
+const {createBaseEmbed} = require('../embeds/base');
+
+const commandName = createCommandName('wild');
+const rerollButtonId = 'reroll';
+
+/**
+ * Makes a wild card trait roll
+ * @param {number} trait The trait die to roll
+ * @param {string} modifier The modifier to apply to the roll
+ * @returns {{ result: number, critical: boolean, traitRoll: DiceRoll, wildCardRoll: DiceRoll}}
+ */
+function handleWilCardRoll(trait, modifier) {
+	log(commandName, 'handleWilCardRoll', {trait, modifier});
+
+	const traitCommand = addModifier(`d${trait}!!`, modifier);
+	const wildCardCommand = addModifier('d6!!', modifier);
+	log(commandName, 'handleWilCardRoll commands', {traitCommand, wildCardCommand});
+
+	const traitRoll = new DiceRoll(traitCommand);
+	const wildCardRoll = new DiceRoll(wildCardCommand);
+	log(commandName, 'handleWilCardRoll rolls', {traitRoll: traitRoll.output, wildCardRoll: wildCardRoll.output});
+
+	const critical = traitRoll.rolls[0].rolls[0].initialValue === 1 &amp;&amp; wildCardRoll.rolls[0].rolls[0].initialValue === 1;
+	const result = traitRoll.total >= wildCardRoll.total ? traitRoll.total : wildCardRoll.total;
+	log(commandName, 'handleWilCardRoll result', result);
+
+	return {
+		result,
+		critical,
+		traitRoll,
+		wildCardRoll,
+	};
+}
+
+/**
+ * Makes a wild card trait reroll
+ * @param {number} trait the trait die to reroll
+ * @param {modifier} modifier the modifiers to apply to the reroll
+ * @returns {{ reroll: number, criticalReroll: boolean, traitReroll: DiceRoll, wildCardReroll: DiceRoll}}
+ */
+function handleWilCardReroll(trait, modifier, last) {
+	const {critical, traitRoll, wildCardRoll} = handleWilCardRoll(trait, modifier);
+
+	const rollTotal = traitRoll.total >= wildCardRoll.total ? traitRoll.total : wildCardRoll.total;
+	const reroll = rollTotal >= last ? rollTotal : last;
+	log(commandName, 'handleWilCardReroll reroll', reroll);
+
+	return {
+		reroll,
+		criticalReroll: critical,
+		traitReroll: traitRoll,
+		wildCardReroll: wildCardRoll,
+	};
+}
+
+/**
+ * Creates the initial wild card embed
+ * @param {string} nickname The name to render in the embed
+ * @param {number} result the result from the roll
+ * @param {DiceRoll} traitRoll the trait die roll
+ * @param {DiceRoll} wildCardRoll the wild card die roll
+ * @returns {EmbedBuilder}
+ */
+function createWildCardRollEmbed(nickname, result, traitRoll, wildCardRoll) {
+	return createBaseEmbed(`${nickname}'s wild card roll!`, [
+		{name: 'Trait Roll', value: traitRoll.output, inline: true},
+		{name: 'Wild Card Roll', value: wildCardRoll.output, inline: true},
+		{name: 'Result', value: `${result}`},
+	]);
+}
+
+/**
+ * Creates a wild card reroll embed
+ * @param {string} nickname The name to render in the embed
+ * @param {number} result the result from the reroll
+ * @param {DiceRoll} traitRoll the trait die reroll
+ * @param {DiceRoll} wildCardRoll the wild card die reroll
+ * @param {number} last the last best roll
+ * @returns {EmbedBuilder}
+ */
+function createWildCardRerollEmbed(nickname, result, traitRoll, wildCardRoll, last) {
+	return createBaseEmbed(`${nickname}'s wild card roll!`, [
+		{name: 'Trait Roll', value: traitRoll.output, inline: true},
+		{name: 'Wild Card Roll', value: wildCardRoll.output, inline: true},
+		{name: 'Previous Best', value: `${last}`, inline: true},
+		{name: 'Result', value: `${result}`},
+	]);
+}
+
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName(commandName)
+		.setDescription('Makes a wild card roll by adding an exploding d6!')
+		.addIntegerOption(option =>
+			option.setName('trait')
+				.setDescription('The trait value to use. For example, if you want to roll for a trait with a d8 just enter "8".')
+				.setRequired(true))
+		.addStringOption(option =>
+			option.setName('modifier')
+				.setDescription('The modifier to use. For example, you would enter "+1" for a bonus of 1, or "-2" for a penalty of 2.')
+				.setRequired(false))
+		.addStringOption(option =>
+			option.setName('nickname')
+				.setDescription('The wild card\'s character name to use for the roll; if blank it will use your server nickname')
+				.setRequired(false)),
+	async execute(interaction) {
+		const trait = interaction.options.getInteger('trait');
+		const modifier = interaction.options.getString('modifier');
+		const nick = interaction.options.getString('nickname');
+		const nickname = nick ?? interaction.member.nick;
+		let rerolled = 0;
+
+		try {
+			const {result, critical, traitRoll, wildCardRoll} = handleWilCardRoll(trait, modifier);
+
+			if (critical) {
+				await interaction.reply({
+					embeds: [createResultEmbed(`${nickname} critically failed!`, 1)],
+					components: [],
+				});
+				return;
+			}
+
+			let currentBest = result;
+			const actionRow = new ActionRowBuilder()
+				.addComponents(
+					new ButtonBuilder()
+						.setCustomId(rerollButtonId)
+						.setLabel('Reroll')
+						.setStyle(ButtonStyle.Success),
+				);
+
+			const message = await interaction.reply({
+				embeds: [createWildCardRollEmbed(nickname, currentBest, traitRoll, wildCardRoll)],
+				components: [actionRow],
+			});
+
+			const filter = i => i.customId === rerollButtonId &amp;&amp; i.user.id === interaction.user.id;
+			const collector = message.createMessageComponentCollector({filter, time: 15000});
+
+			collector.on('collect', async i => {
+				if (i.user.id !== interaction.user.id) {
+					i.reply({content: 'This isn\'t your roll!', ephemeral: true});
+					return;
+				}
+
+				const {reroll, criticalReroll, traitReroll, wildCardReroll} = handleWilCardReroll(trait, modifier, currentBest);
+
+				if (criticalReroll) {
+					collector.stop('critical-failure');
+					return;
+				}
+
+				await i.update({
+					content: `Rerolled ${++rerolled} times!`,
+					embeds: [createWildCardRerollEmbed(nickname, reroll, traitReroll, wildCardReroll, currentBest)],
+					components: [actionRow],
+				});
+
+				currentBest = reroll;
+			});
+
+			collector.on('end', async (collected, reason) => {
+				log(commandName, 'collector end', {reason, collected});
+				if (reason === 'critical-failure') {
+					await message.interaction.editReply({
+						embeds: [createResultEmbed(`${nickname} critically failed!`, 1)],
+						components: [],
+					});
+					return;
+				}
+
+				message.interaction.editReply({
+					content: `Final result (rerolled ${rerolled} times)!`,
+					embeds: [createResultEmbed(`${nickname}'s wild card roll!`, currentBest)],
+					components: [],
+				});
+			});
+		} catch (err) {
+			error(commandName, 'error replying to interaction', err);
+		}
+	},
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.11</a> on Sun Sep 11 2022 19:27:05 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

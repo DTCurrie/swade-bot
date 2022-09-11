@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>commands/roll.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-add-modifiers.html">add-modifiers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-add-modifiers.html#~addModifier">addModifier</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-base.html">base</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-base.html#~createBaseEmbed">createBaseEmbed</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-command-name.html">command-name</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-command-name.html#~createCommandName">createCommandName</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-extra.html">extra</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-extra.html#~handleExtraReroll">handleExtraReroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-extra.html#~handleExtraRoll">handleExtraRoll</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-logger.html">logger</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-logger.html#~error">error</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-logger.html#~info">info</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-logger.html#~log">log</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-logger.html#~output">output</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-logger.html#~warn">warn</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-result.html">result</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-result.html#~createResultEmbed">createResultEmbed</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-roll.html">roll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-roll.html#~handleReroll">handleReroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-roll.html#~handleRoll">handleRoll</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-rolls.html">rolls</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-rolls.html#~createRerollEmbed">createRerollEmbed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-rolls.html#~createRollEmbed">createRollEmbed</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-wild.html">wild</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-wild.html#~createWildCardRerollEmbed">createWildCardRerollEmbed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-wild.html#~createWildCardRollEmbed">createWildCardRollEmbed</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-wild.html#~handleWilCardReroll">handleWilCardReroll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-wild.html#~handleWilCardRoll">handleWilCardRoll</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">commands/roll.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A module for creating the `/roll` command for the bot.
+ * @module roll
+ */
+
+const {
+	ActionRowBuilder,
+	ButtonBuilder,
+	ButtonStyle,
+	SlashCommandBuilder,
+} = require('discord.js');
+
+const {DiceRoll} = require('@dice-roller/rpg-dice-roller');
+
+const {log, error} = require('../lib/logger');
+const {createCommandName} = require('../lib/command-name');
+const {createRollEmbed, createRerollEmbed} = require('../embeds/rolls');
+const {createBaseEmbed} = require('../embeds/base');
+
+const commandName = createCommandName('roll');
+const rerollButtonId = 'reroll';
+
+/**
+ * Handles a standard roll
+ * @param {string} dice The dice roll notation to use
+ * @returns {{ result: number, output: string }}
+ */
+function handleRoll(dice) {
+	log(commandName, 'handleRoll', dice);
+
+	const roll = new DiceRoll(dice);
+	log(commandName, 'handleRoll roll', roll.output);
+
+	return {
+		result: roll.total,
+		output: roll.output,
+	};
+}
+
+/**
+ * Makes an extra trait reroll
+ * @param {string} dice The dice roll notation to use for the reroll
+ * @param {number} last The last best roll
+ * @returns {{ reroll: number, rerollOutput: string}}
+ */
+function handleReroll(dice, last) {
+	const {result, output} = handleRoll(dice);
+
+	const reroll = result >= last ? result : last;
+	log(commandName, 'handleReroll reroll', reroll);
+
+	return {
+		reroll,
+		rerollOutput: output,
+	};
+}
+
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName(commandName)
+		.setDescription('Makes a standard dice roll using Dice Notation!')
+		.addStringOption(option =>
+			option.setName('dice')
+				.setDescription('The dice notation to roll, including all modifiers.')
+				.setRequired(true))
+		.addStringOption(option =>
+			option.setName('nickname')
+				.setDescription('The name to use for the roll; if blank it will use your server nickname')
+				.setRequired(false)),
+	async execute(interaction) {
+		const dice = interaction.options.getString('dice');
+		const nick = interaction.options.getString('nickname');
+		const nickname = nick ?? interaction.member.nick;
+		let rerolled = 0;
+
+		try {
+			const {result, output} = handleRoll(dice);
+			let currentBest = result;
+
+			const actionRow = new ActionRowBuilder()
+				.addComponents(
+					new ButtonBuilder()
+						.setCustomId(rerollButtonId)
+						.setLabel('Reroll')
+						.setStyle(ButtonStyle.Success),
+				);
+
+			const message = await interaction.reply({
+				embeds: [createRollEmbed(nickname, result, output)],
+				components: [actionRow],
+			});
+
+			const filter = i => i.customId === rerollButtonId &amp;&amp; i.user.id === interaction.user.id;
+			const collector = message.createMessageComponentCollector({filter, time: 15000});
+
+			collector.on('collect', async i => {
+				if (i.user.id !== interaction.user.id) {
+					i.reply({content: 'This isn\'t your roll!', ephemeral: true});
+					return;
+				}
+
+				const {reroll, criticalReroll, rerollOutput} = handleReroll(dice, currentBest);
+
+				if (criticalReroll) {
+					collector.stop('critical-failure');
+					return;
+				}
+
+				await i.update({
+					content: `Rerolled ${++rerolled} times!`,
+					embeds: [createRerollEmbed(nickname, reroll, rerollOutput, currentBest)],
+					components: [actionRow],
+				});
+
+				currentBest = reroll;
+			});
+
+			collector.on('end', async (collected, reason) => {
+				log(commandName, 'collector end', {reason, collected});
+
+				message.interaction.editReply({
+					content: `Final result (rerolled ${rerolled} times)!`,
+					embeds: [createBaseEmbed(`${nickname}'s  roll!`, [{name: 'Result', value: `${currentBest}`}])],
+					components: [],
+				});
+			});
+		} catch (err) {
+			error(commandName, 'error replying to interaction', err);
+		}
+	},
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.11</a> on Sun Sep 11 2022 19:27:05 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

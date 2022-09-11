@@ -8,6 +8,7 @@ on:
 
 jobs:
   verify-docs:
+    name: "Verify Docs"
     runs-on: ubuntu-latest
     strategy:
       matrix:

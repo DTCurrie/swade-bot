@@ -3,7 +3,9 @@
 ![Docs](https://github.com/DTCurrie/swade-bot/actions/workflows/docs.yaml/badge.svg)
 ![Code Quality](https://github.com/DTCurrie/swade-bot/actions/workflows/codeql.yaml/badge.svg)
 
-A quick an dirty discord dice bot for playing Savage Worlds games.
+![SWADE](https://github.com/DTCurrie/swade-bot/blob/main/assets/swade-logo.png)
+
+A quick, dirty, and unofficial discord dice bot for playing Savage Worlds Adventure Edition games. [Click here](https://peginc.com/savage-settings/savage-worlds/) to learn more about Savage Worlds, and to order your rule book from the fine folk at Pinnacle Entertainment Group. Or, check out their [free test drive rules](https://peginc.com/store/deadlands-the-weird-west-blood-on-the-range-savage-worlds-test-drive-swade/)!
 
 Currently supports:
 - `/wild` wild card rolls with re-rolling and critical failures

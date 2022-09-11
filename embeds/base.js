@@ -18,7 +18,7 @@ function createBaseEmbed(title, fields, color) {
 		.setTitle(title)
 		.setAuthor({
 			name: 'SWADE Bot',
-			iconURL: 'https://cdn-cmhfa.nitrocdn.com/sILXXMmoPZtGHchENBdSFUfGNBQKBJVN/assets/static/optimized/rev-5f0e4a3/wp-content/uploads/2021/03/swade-88x60-1.png',
+			iconURL: 'https://github.com/DTCurrie/swade-bot/blob/main/assets/swade-logo.png',
 			url: 'https://github.com/DTCurrie/swade-bot',
 		})
 		.addFields(...fields)

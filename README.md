@@ -1,5 +1,8 @@
 # SWADE Bot
 
+![Docs](https://github.com/DTCurrie/savager-bot/actions/workflows/docs.yml/badge.svg)
+![Code Quality](https://github.com/DTCurrie/savager-bot/actions/workflows/codeql.yml/badge.svg)
+
 A quick an dirty discord dice bot for playing Savage Worlds games.
 
 Currently supports:

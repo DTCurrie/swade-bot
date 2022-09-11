@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A quick and dirty discord bot for the Savage Worlds tabletop RPG",
   "main": "index.js",
+  "packageManager": "pnpm@7.11.0",
   "scripts": {
     "start": "npm-watch dev",
     "dev": "npm run deploy-commands && npm run bot",

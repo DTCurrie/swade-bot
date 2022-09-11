@@ -23,9 +23,9 @@ jobs:
       - name: Build
         run: npm run generate-docs
 
-      - name: Current NPM Package Version
-        uses: justincy/npm-version-action@2.1.0
+      - name: Get npm version action
         id: npmVersion
+        uses: pchynoweth/action-get-npm-version@1.0.1
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

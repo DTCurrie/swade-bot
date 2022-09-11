@@ -11,8 +11,8 @@ A quick, dirty, and unofficial discord dice bot for playing Savage Worlds Advent
 
 Currently supports:
 - `/wild` wild card rolls with re-rolling and critical failures
-- `/extra` extra rolls re-rolling and critical failures
-- `/roll` standard dice rolls re-rolling
+- `/extra` extra rolls with re-rolling and critical failures
+- `/roll` standard dice rolls with re-rolling
 
 Invite the bot to your server using [this link](https://discord.com/api/oauth2/authorize?client_id=1017897656481230969&scope=applications.commands)!
 

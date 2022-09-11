@@ -1,5 +1,5 @@
 {
-  "name": "savager-bot",
+  "name": "swade-bot",
   "version": "0.0.1",
   "description": "A quick and dirty discord bot for the Savage Worlds tabletop RPG",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "bot": "node ./index.js",
     "deploy-commands": "node deploy-commands.js",
     "start-docs": "npm-watch docs",
-    "docs": "npm run generate-docs && serve ./docs/savager-bot/$npm_package_version/",
+    "docs": "npm run generate-docs && serve ./docs/swade-bot/$npm_package_version/",
     "generate-docs": "jsdoc --configure .jsdoc.json --verbose",
     "lint": "eslint . --config .eslintrc.js --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif",
     "test": "echo \"Error: no test specified\" && exit 1"

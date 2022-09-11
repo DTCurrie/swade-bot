@@ -10,100 +10,89 @@ const {DiceRoll} = require('@dice-roller/rpg-dice-roller');
 const {addModifier} = require('../lib/add-modifier');
 const {log, error} = require('../lib/logger');
 const {createCommandName} = require('../lib/command-name');
-const {createResultEmbed} = require('../embeds/result');
 const {createBaseEmbed} = require('../embeds/base');
+const {createResultEmbed} = require('../embeds/result');
 
-const commandName = createCommandName('wild');
+const commandName = createCommandName('extra');
 const rerollButtonId = 'reroll';
 
 /**
- * Makes a wild card trait roll
+ * Handles an extra trait roll
  * @param {number} trait The trait die to roll
  * @param {string} modifier The modifier to apply to the roll
- * @returns {{ result: number, critical: boolean, traitRoll: DiceRoll, wildCardRoll: DiceRoll}}
+ * @returns {{ critical: boolean, result: number, output: string }}
  */
-function handleWilCardRoll(trait, modifier) {
-	log(commandName, 'handleWilCardRoll', {trait, modifier});
+function handleExtraRoll(trait, modifier) {
+	log(commandName, 'handleExtraRoll', {trait, modifier});
 
-	const traitCommand = addModifier(`d${trait}!!`, modifier);
-	const wildCardCommand = addModifier('d6!!', modifier);
-	log(commandName, 'handleWilCardRoll commands', {traitCommand, wildCardCommand});
+	const command = addModifier(`d${trait}`, modifier);
+	log(commandName, 'handleExtraRoll command', command);
 
-	const traitRoll = new DiceRoll(traitCommand);
-	const wildCardRoll = new DiceRoll(wildCardCommand);
-	log(commandName, 'handleWilCardRoll rolls', {traitRoll: traitRoll.output, wildCardRoll: wildCardRoll.output});
+	const roll = new DiceRoll(command);
+	log(commandName, 'handleExtraRoll roll', roll.output);
 
-	const critical = traitRoll.rolls[0].rolls[0].initialValue === 1 && wildCardRoll.rolls[0].rolls[0].initialValue === 1;
-	const result = traitRoll.total >= wildCardRoll.total ? traitRoll.total : wildCardRoll.total;
-	log(commandName, 'handleWilCardRoll result', result);
+	const critical = roll.rolls[0].rolls[0].initialValue === 1;
 
 	return {
-		result,
 		critical,
-		traitRoll,
-		wildCardRoll,
+		result: roll.total,
+		output: roll.output,
 	};
 }
 
 /**
- * Makes a wild card trait reroll
+ * Makes an extra trait reroll
  * @param {number} trait the trait die to reroll
  * @param {modifier} modifier the modifiers to apply to the reroll
- * @returns {{ reroll: number, criticalReroll: boolean, traitReroll: DiceRoll, wildCardReroll: DiceRoll}}
+ * @returns {{ reroll: number, criticalReroll: boolean, rerollOutput: string}}
  */
-function handleWilCardReroll(trait, modifier, last) {
-	const {critical, traitRoll, wildCardRoll} = handleWilCardRoll(trait, modifier);
+function handleExtraReroll(trait, modifier, last) {
+	const {critical, result, output} = handleExtraRoll(trait, modifier);
 
-	const rollTotal = traitRoll.total >= wildCardRoll.total ? traitRoll.total : wildCardRoll.total;
-	const reroll = rollTotal >= last ? rollTotal : last;
-	log(commandName, 'handleWilCardReroll reroll', reroll);
+	const reroll = result >= last ? result : last;
+	log(commandName, 'handleExtraReroll reroll', reroll);
 
 	return {
 		reroll,
 		criticalReroll: critical,
-		traitReroll: traitRoll,
-		wildCardReroll: wildCardRoll,
+		rerollOutput: output,
 	};
 }
 
 /**
- * Creates the initial wild card embed
+ * Creates the initial extra roll embed
  * @param {string} nickname The name to render in the embed
- * @param {number} result the result from the roll
- * @param {DiceRoll} traitRoll the trait die roll
- * @param {DiceRoll} wildCardRoll the wild card die roll
+ * @param {number} result The result from the roll
+ * @param {string} output The output from the roll
  * @returns {EmbedBuilder}
  */
-function createWildCardRollEmbed(nickname, result, traitRoll, wildCardRoll) {
-	return createBaseEmbed(`${nickname}'s wild card roll!`, [
-		{name: 'Trait Roll', value: traitRoll.output, inline: true},
-		{name: 'Wild Card Roll', value: wildCardRoll.output, inline: true},
-		{name: 'Result', value: `${result}`},
+function createExtraRollEmbed(nickname, result, output) {
+	return createBaseEmbed(`${nickname}'s roll!`, [
+		{name: 'Result', value: `${result}`, inline: true},
+		{name: 'Output', value: `${output}`},
 	]);
 }
 
 /**
- * Creates a wild card reroll embed
+ * Creates an extra reroll embed
  * @param {string} nickname The name to render in the embed
- * @param {number} result the result from the reroll
- * @param {DiceRoll} traitRoll the trait die reroll
- * @param {DiceRoll} wildCardRoll the wild card die reroll
- * @param {number} last the last best roll
+ * @param {number} result The result from the reroll
+ * @param {string} output The output from the reroll
+ * @param {number} last The result of the last roll
  * @returns {EmbedBuilder}
  */
-function createWildCardRerollEmbed(nickname, result, traitRoll, wildCardRoll, last) {
-	return createBaseEmbed(`${nickname}'s wild card roll!`, [
-		{name: 'Trait Roll', value: traitRoll.output, inline: true},
-		{name: 'Wild Card Roll', value: wildCardRoll.output, inline: true},
+function createExtraRerollEmbed(nickname, result, output, last) {
+	return createBaseEmbed(`${nickname}'s roll!`, [
+		{name: 'Result', value: `${result}`, inline: true},
 		{name: 'Previous Best', value: `${last}`, inline: true},
-		{name: 'Result', value: `${result}`},
+		{name: 'Output', value: `${output}`},
 	]);
 }
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName(commandName)
-		.setDescription('Makes a wild card roll by adding an exploding d6!')
+		.setDescription('Makes an extra roll!')
 		.addIntegerOption(option =>
 			option.setName('trait')
 				.setDescription('The trait value to use. For example, if you want to roll for a trait with a d8 just enter "8".')
@@ -113,18 +102,26 @@ module.exports = {
 				.setDescription('The modifier to use. For example, you would enter "+1" for a bonus of 1, or "-2" for a penalty of 2.')
 				.setRequired(false))
 		.addStringOption(option =>
-			option.setName('nickname')
-				.setDescription('The wild card\'s character name to use for the roll; if blank it will use your server nickname')
+			option.setName('extra')
+				.setDescription('The extra\'s character name to use for the roll; if blank it will use your server nickname')
 				.setRequired(false)),
 	async execute(interaction) {
 		const trait = interaction.options.getInteger('trait');
 		const modifier = interaction.options.getString('modifier');
-		const nick = interaction.options.getString('nickname');
-		const nickname = nick ?? interaction.member.nick;
+		const extra = interaction.options.getString('extra');
+		const nickname = extra ?? interaction.member.nick;
 		let rerolled = 0;
 
+		log(commandName, 'inputs', {trait, modifier});
+
+		const command = addModifier(`d${trait}`, modifier);
+		log(commandName, 'command', command);
+
+		const roll = new DiceRoll(command);
+		log(commandName, 'roll', roll.output);
+
 		try {
-			const {result, critical, traitRoll, wildCardRoll} = handleWilCardRoll(trait, modifier);
+			const {critical, result, output} = handleExtraRoll(trait, modifier);
 
 			if (critical) {
 				await interaction.reply({
@@ -144,7 +141,7 @@ module.exports = {
 				);
 
 			const message = await interaction.reply({
-				embeds: [createWildCardRollEmbed(nickname, currentBest, traitRoll, wildCardRoll)],
+				embeds: [createExtraRollEmbed(nickname, result, output)],
 				components: [actionRow],
 			});
 
@@ -157,7 +154,7 @@ module.exports = {
 					return;
 				}
 
-				const {reroll, criticalReroll, traitReroll, wildCardReroll} = handleWilCardReroll(trait, modifier, currentBest);
+				const {reroll, criticalReroll, rerollOutput} = handleExtraReroll(trait, modifier, currentBest);
 
 				if (criticalReroll) {
 					collector.stop('critical-failure');
@@ -166,7 +163,7 @@ module.exports = {
 
 				await i.update({
 					content: `Rerolled ${++rerolled} times!`,
-					embeds: [createWildCardRerollEmbed(nickname, reroll, traitReroll, wildCardReroll, currentBest)],
+					embeds: [createExtraRerollEmbed(nickname, reroll, rerollOutput, currentBest)],
 					components: [actionRow],
 				});
 

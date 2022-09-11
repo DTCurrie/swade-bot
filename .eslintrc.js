@@ -11,5 +11,7 @@ module.exports = {
 		ecmaVersion: 'latest',
 	},
 	rules: {
+		'max-params': ['warn', 5],
 	},
+	ignorePatterns: ['*.md'],
 };

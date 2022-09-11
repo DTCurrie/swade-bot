@@ -19,7 +19,7 @@ for (const file of commandFiles) {
 }
 
 client.on('ready', () => {
-	console.log(`Logged in as ${client.user.tag}!`);
+	console.log('\x1b[32m%s\x1b[0m', `Logged in as ${client.user.tag} in ${process.env.NODE_ENV === 'production' ? 'production' : 'development'} mode!`);
 });
 
 client.on('interactionCreate', async interaction => {
@@ -36,7 +36,7 @@ client.on('interactionCreate', async interaction => {
 	try {
 		await command.execute(interaction);
 	} catch (error) {
-		console.error(error);
+		console.error('\x1b[31m%s\x1b[0m', error);
 		await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});
 	}
 });

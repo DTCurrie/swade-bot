@@ -15,6 +15,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.2.2
         with:

@@ -1,3 +1,8 @@
+/**
+ * A module for creating the `/extra` command for the bot.
+ * @module extra
+ */
+
 const {
 	ActionRowBuilder,
 	ButtonBuilder,

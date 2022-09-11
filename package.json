@@ -8,6 +8,9 @@
     "dev": "npm run deploy-commands && npm run bot",
     "bot": "node ./index.js",
     "deploy-commands": "node deploy-commands.js",
+    "start-docs": "npm-watch docs",
+    "docs": "npm run generate-docs && serve ./docs/savager-bot/$npm_package_version/",
+    "generate-docs": "jsdoc --configure .jsdoc.json --verbose",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -24,15 +27,29 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
-    "npm-watch": "^0.11.0"
+    "jsdoc": "^3.6.11",
+    "minami": "^1.2.3",
+    "npm-watch": "^0.11.0",
+    "serve": "^14.0.1"
   },
   "watch": {
     "dev": {
       "patterns": [
-        "**/*.js"
+        "index.js",
+        "commands/**/*.js",
+        "embeds/**/*.js",
+        "lib/**/*.js"
       ],
-      "extensions": "js",
-      "ignore": "./deploy-commands",
+      "runOnChangeOnly": false,
+      "delay": 2500
+    },
+    "docs": {
+      "patterns": [
+        "index.js",
+        "commands/**/*.js",
+        "embeds/**/*.js",
+        "lib/**/*.js"
+      ],
       "runOnChangeOnly": false,
       "delay": 2500
     }

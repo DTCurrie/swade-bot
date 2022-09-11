@@ -1,3 +1,8 @@
+/**
+ * A module for creating the `/roll` command for the bot.
+ * @module roll
+ */
+
 const {
 	ActionRowBuilder,
 	ButtonBuilder,

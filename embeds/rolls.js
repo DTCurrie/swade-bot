@@ -1,3 +1,8 @@
+/**
+ * A module for creating roll embeds.
+ * @module rolls
+ */
+
 const {createBaseEmbed} = require('./base');
 
 /**
@@ -5,7 +10,7 @@ const {createBaseEmbed} = require('./base');
  * @param {string} nickname The name to render in the embed
  * @param {number} result The result from the roll
  * @param {string} output The output from the roll
- * @returns {EmbedBuilder}
+ * @returns {EmbedBuilder} the embed
  */
 function createRollEmbed(nickname, result, output) {
 	return createBaseEmbed(`${nickname}'s roll!`, [
@@ -20,7 +25,7 @@ function createRollEmbed(nickname, result, output) {
  * @param {number} result The result from the reroll
  * @param {string} output The output from the reroll
  * @param {number} last The result of the last roll
- * @returns {EmbedBuilder}
+ * @returns {EmbedBuilder} the embed
  */
 function createRerollEmbed(nickname, result, output, last) {
 	return createBaseEmbed(`${nickname}'s roll!`, [

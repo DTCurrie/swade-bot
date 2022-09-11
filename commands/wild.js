@@ -1,3 +1,8 @@
+/**
+ * A module for creating the `/wild` command for the bot.
+ * @module wild
+ */
+
 const {
 	ActionRowBuilder,
 	ButtonBuilder,

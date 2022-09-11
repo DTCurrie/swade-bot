@@ -1,0 +1,35 @@
+name: Docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          run_install: true
+
+      - name: Build
+        run: npm run generate-docs
+
+      - name: Current NPM Package Version
+        uses: justincy/npm-version-action@2.1.0
+        id: npmVersion
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/savager-bot/${{ steps.npmVersion.outputs.version }}
+
+
+
+          

@@ -1,7 +1,7 @@
 name: Docs
 
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
 
   workflow_dispatch:
@@ -34,17 +34,3 @@ jobs:
 
       - name: Build
         run: npm run generate-docs
-
-      - name: Get npm version action
-        id: npmVersion
-        uses: pchynoweth/action-get-npm-version@1.0.1
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/swade-bot/${{ steps.npmVersion.outputs.version }}
-
-
-
-          

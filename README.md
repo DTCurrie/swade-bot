@@ -1,6 +1,6 @@
 # SWADE Bot
 
-![Docs](https://github.com/DTCurrie/swade-bot/actions/workflows/docs.yaml/badge.svg)
+![Docs](https://github.com/DTCurrie/swade-bot/actions/workflows/deploy-docs.yaml/badge.svg)
 ![Code Quality](https://github.com/DTCurrie/swade-bot/actions/workflows/codeql.yaml/badge.svg)
 
 <p align="center">

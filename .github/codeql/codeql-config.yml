@@ -1,0 +1,7 @@
+paths-ignore:
+  - node_modules
+  - docs
+  - .*
+  - LICENSE
+  - pnpm-lock.yaml
+  - README.md

@@ -10,8 +10,8 @@ const {DiceRoll} = require('@dice-roller/rpg-dice-roller');
 const {addModifier} = require('../lib/add-modifier');
 const {log, error} = require('../lib/logger');
 const {createCommandName} = require('../lib/command-name');
-const {createBaseEmbed} = require('../embeds/base');
 const {createResultEmbed} = require('../embeds/result');
+const {createRollEmbed, createRerollEmbed} = require('../embeds/rolls');
 
 const commandName = createCommandName('extra');
 const rerollButtonId = 'reroll';
@@ -59,36 +59,6 @@ function handleExtraReroll(trait, modifier, last) {
 	};
 }
 
-/**
- * Creates the initial extra roll embed
- * @param {string} nickname The name to render in the embed
- * @param {number} result The result from the roll
- * @param {string} output The output from the roll
- * @returns {EmbedBuilder}
- */
-function createExtraRollEmbed(nickname, result, output) {
-	return createBaseEmbed(`${nickname}'s roll!`, [
-		{name: 'Result', value: `${result}`, inline: true},
-		{name: 'Output', value: `${output}`},
-	]);
-}
-
-/**
- * Creates an extra reroll embed
- * @param {string} nickname The name to render in the embed
- * @param {number} result The result from the reroll
- * @param {string} output The output from the reroll
- * @param {number} last The result of the last roll
- * @returns {EmbedBuilder}
- */
-function createExtraRerollEmbed(nickname, result, output, last) {
-	return createBaseEmbed(`${nickname}'s roll!`, [
-		{name: 'Result', value: `${result}`, inline: true},
-		{name: 'Previous Best', value: `${last}`, inline: true},
-		{name: 'Output', value: `${output}`},
-	]);
-}
-
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName(commandName)
@@ -112,14 +82,6 @@ module.exports = {
 		const nickname = extra ?? interaction.member.nick;
 		let rerolled = 0;
 
-		log(commandName, 'inputs', {trait, modifier});
-
-		const command = addModifier(`d${trait}`, modifier);
-		log(commandName, 'command', command);
-
-		const roll = new DiceRoll(command);
-		log(commandName, 'roll', roll.output);
-
 		try {
 			const {critical, result, output} = handleExtraRoll(trait, modifier);
 
@@ -141,7 +103,7 @@ module.exports = {
 				);
 
 			const message = await interaction.reply({
-				embeds: [createExtraRollEmbed(nickname, result, output)],
+				embeds: [createRollEmbed(nickname, result, output)],
 				components: [actionRow],
 			});
 
@@ -163,7 +125,7 @@ module.exports = {
 
 				await i.update({
 					content: `Rerolled ${++rerolled} times!`,
-					embeds: [createExtraRerollEmbed(nickname, reroll, rerollOutput, currentBest)],
+					embeds: [createRerollEmbed(nickname, reroll, rerollOutput, currentBest)],
 					components: [actionRow],
 				});
 
@@ -182,7 +144,7 @@ module.exports = {
 
 				message.interaction.editReply({
 					content: `Final result (rerolled ${rerolled} times)!`,
-					embeds: [createResultEmbed(`${nickname}'s wild card roll!`, currentBest)],
+					embeds: [createResultEmbed(`${nickname}'s roll!`, currentBest)],
 					components: [],
 				});
 			});

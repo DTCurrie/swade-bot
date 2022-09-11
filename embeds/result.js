@@ -11,10 +11,7 @@ const {createBaseEmbed} = require('./base');
 function createResultEmbed(title, result) {
 	return createBaseEmbed(
 		title,
-		[{
-			name: 'Result',
-			value: `${result}`,
-		}],
+		[{name: 'Result', value: `${result}`}],
 		result >= 4 ? Colors.Green : Colors.Red);
 }
 

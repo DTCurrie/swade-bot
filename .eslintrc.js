@@ -13,5 +13,5 @@ module.exports = {
 	rules: {
 		'max-params': ['warn', 5],
 	},
-	ignorePatterns: ['*.md'],
+	ignorePatterns: ['*.md', '/docs'],
 };

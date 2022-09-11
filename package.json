@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "A quick and dirty discord bot for the Savage Worlds tabletop RPG",
   "main": "index.js",
-  "packageManager": "pnpm@7.11.0",
   "scripts": {
     "start": "npm-watch dev",
     "dev": "npm run deploy-commands && npm run bot",
@@ -12,6 +11,7 @@
     "start-docs": "npm-watch docs",
     "docs": "npm run generate-docs && serve ./docs/savager-bot/$npm_package_version/",
     "generate-docs": "jsdoc --configure .jsdoc.json --verbose",
+    "lint": "eslint . --config .eslintrc.js --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -23,6 +23,7 @@
     "discord.js": "^14.3.0"
   },
   "devDependencies": {
+    "@microsoft/eslint-formatter-sarif": "^3.0.0",
     "eslint": "^8.0.1",
     "eslint-config-xo": "^0.42.0",
     "eslint-plugin-import": "^2.25.2",

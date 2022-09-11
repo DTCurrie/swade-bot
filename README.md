@@ -18,9 +18,9 @@ Invite the bot to your server using [this link](https://discord.com/api/oauth2/a
 
 ## Development
 
-Since the bot app requires client and guild credentials, the easiest way to work on the bot will to be to create your own bot, and then use it's credentials.
+Since the bot app requires client and guild credentials, the easiest way to work on the bot will to be to create your own bot, and then use its credentials.
 
-Once your bot is created, pull down the code and create your own branch/fork. Then create a `config.json` file in the project root and include the following:
+Once your bot is created, pull down the code and create your own branch/fork. Then create a `config.json` file in the project root (it will be ignored by `git`) and include the following:
 ```json
 {
     "clientId": "<your bot's client ID>",
@@ -31,7 +31,8 @@ Once your bot is created, pull down the code and create your own branch/fork. Th
 
 Then follow these steps:
 1. Install `pnpm`: https://pnpm.io/installation
-2. Install dependencies with `pnpm i`
-3. Start local bot (points to server you used for the `guildId`) with `npm start`, which will watch for file changes and re-deploy commands before restarting the bot
-4. Interactions are logged to the terminal `console`
-5. Development commands will have a `-dev` suffix in the server you used for the `guildId`
+2. Install the dependencies with `pnpm i`
+3. Start your local bot with `npm start`, which will watch for file changes and re-deploy commands before restarting the bot
+4. Development commands will have a `-dev` suffix and will be deployed to the server you used for the `guildId` in `config.json`
+5. Log messages are outputted to the terminal `console`
+6. Commands will not become global until the next release

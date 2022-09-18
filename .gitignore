@@ -11,10 +11,6 @@ docs/
 
 config.json
 
-# editor
-
-.vscode
-
 # linting output
 
 *.sarif

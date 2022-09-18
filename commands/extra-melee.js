@@ -1,6 +1,6 @@
 /**
- * A module for creating the `/wild` command for the bot.
- * @module wild
+ * A module for creating the `/extra-melee` command for the bot.
+ * @module extra-melee
  */
 
 const {
@@ -12,24 +12,27 @@ const {log, error} = require('../lib/logger');
 const {createCommandName} = require('../lib/command-name');
 const {createTraitResultEmbed} = require('../embeds/trait-result');
 const {setTraitOption, setModifierOption, setNicknameOption, getTraitRollOptions} = require('../lib/trait-roll-options');
-const {wildCardTraitRoll, wildCardTraitReroll} = require('../lib/rolls');
+const {extraTraitRoll, extraTraitReroll} = require('../lib/rolls');
 const {createTraitEmbed} = require('../embeds/trait');
+const {createMeleeResultEmbed} = require('../embeds/melee-result');
 const {createRerollButton, REROLL_BUTTON_ID} = require('../lib/reroll-button');
-const {ACCEPT_BUTTON_ID, createAcceptButton} = require('../lib/accept-button');
+const {setParryOption, getParryOption} = require('../lib/melee-roll-options');
+const {createAcceptButton, ACCEPT_BUTTON_ID} = require('../lib/accept-button');
 
-const commandName = createCommandName('wild');
+const commandName = createCommandName('extra-melee');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName(commandName)
-		.setDescription('Makes a wild card roll by adding an exploding d6!')
+		.setDescription('Makes an extra melee roll!')
 		.addIntegerOption(setTraitOption)
 		.addStringOption(setModifierOption)
+		.addIntegerOption(setParryOption)
 		.addStringOption(setNicknameOption),
 	async execute(interaction) {
 		const {trait, modifier, nickname} = getTraitRollOptions(interaction);
-		const title = `${nickname}'s wild card roll`;
-
+		const parry = getParryOption(interaction);
+		const title = `${nickname}'s extra melee roll`;
 		let rerolled = 0;
 
 		try {
@@ -37,8 +40,7 @@ module.exports = {
 				result,
 				critical,
 				roll,
-				wildRoll,
-			} = wildCardTraitRoll(commandName, trait, modifier);
+			} = extraTraitRoll(commandName, trait, modifier);
 
 			if (critical) {
 				await interaction.reply({
@@ -49,13 +51,14 @@ module.exports = {
 			}
 
 			let currentBest = result;
+
 			const actionRow = new ActionRowBuilder().addComponents(
 				createRerollButton(),
 				createAcceptButton(),
 			);
 
 			const message = await interaction.reply({
-				embeds: [createTraitEmbed(title, currentBest, roll, wildRoll)],
+				embeds: [createTraitEmbed(title, currentBest, roll)],
 				components: [actionRow],
 			});
 
@@ -77,8 +80,7 @@ module.exports = {
 						rerollResult,
 						criticalReroll,
 						reroll,
-						wildReroll,
-					} = wildCardTraitReroll(commandName, trait, modifier, currentBest);
+					} = extraTraitReroll(commandName, trait, modifier, currentBest);
 
 					if (criticalReroll) {
 						collector.stop('critical-failure');
@@ -93,7 +95,7 @@ module.exports = {
 									title,
 									rerollResult,
 									reroll,
-									wildReroll,
+									undefined,
 									currentBest,
 								),
 							],
@@ -116,12 +118,19 @@ module.exports = {
 						embeds: [createTraitResultEmbed(`${nickname} critically failed!`, 1)],
 						components: [],
 					});
+
 					return;
 				}
 
 				message.interaction.editReply({
 					content: `Final result (rerolled ${rerolled} times)!`,
-					embeds: [createTraitResultEmbed(`${nickname}'s wild card roll!`, currentBest)],
+					embeds: [
+						createMeleeResultEmbed(
+							`${nickname}'s extra melee roll!`,
+							currentBest,
+							parry,
+						),
+					],
 					components: [],
 				});
 			});

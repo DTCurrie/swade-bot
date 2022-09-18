@@ -1,0 +1,16 @@
+{
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.runtime": "",
+    "eslint.options": {
+        "extensions": [".js"]
+    },
+    "eslint.validate": [ "javascript" ],
+    "cSpell.words": [
+        "rerollable",
+        "swade"
+    ]
+}

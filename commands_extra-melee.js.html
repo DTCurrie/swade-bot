@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>extra - Documentation</title>
+    <title>commands/extra-melee.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,128 +29,160 @@
 
 <div id="main">
     
-    <h1 class="page-title">extra</h1>
+    <h1 class="page-title">commands/extra-melee.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A module for creating the `/extra-melee` command for the bot.
+ * @module extra-melee
+ */
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>A module for creating the <code>/extra</code> command for the bot.</p></div>
-        
+const {
+	ActionRowBuilder,
+	SlashCommandBuilder,
+} = require('discord.js');
 
-        
-            
-<div class="section-method">
+const {log, error} = require('../lib/logger');
+const {createCommandName} = require('../lib/command-name');
+const {createTraitResultEmbed} = require('../embeds/trait-result');
+const {setTraitOption, setModifierOption, setNicknameOption, getTraitRollOptions} = require('../lib/trait-roll-options');
+const {extraTraitRoll, extraTraitReroll} = require('../lib/rolls');
+const {createTraitEmbed} = require('../embeds/trait');
+const {createMeleeResultEmbed} = require('../embeds/melee-result');
+const {createRerollButton, REROLL_BUTTON_ID} = require('../lib/reroll-button');
+const {setParryOption, getParryOption} = require('../lib/melee-roll-options');
+const {createAcceptButton, ACCEPT_BUTTON_ID} = require('../lib/accept-button');
 
+const commandName = createCommandName('extra-melee');
 
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName(commandName)
+		.setDescription('Makes an extra melee roll!')
+		.addIntegerOption(setTraitOption)
+		.addStringOption(setModifierOption)
+		.addIntegerOption(setParryOption)
+		.addStringOption(setNicknameOption),
+	async execute(interaction) {
+		const {trait, modifier, nickname} = getTraitRollOptions(interaction);
+		const parry = getParryOption(interaction);
+		const title = `${nickname}'s extra melee roll`;
+		let rerolled = 0;
 
+		try {
+			const {
+				result,
+				critical,
+				roll,
+			} = extraTraitRoll(commandName, trait, modifier);
 
+			if (critical) {
+				await interaction.reply({
+					embeds: [createTraitResultEmbed(`${nickname} critically failed!`, 1)],
+					components: [],
+				});
+				return;
+			}
 
+			let currentBest = result;
 
+			const actionRow = new ActionRowBuilder().addComponents(
+				createRerollButton(),
+				createAcceptButton(),
+			);
 
-<dl class="details">
+			const message = await interaction.reply({
+				embeds: [createTraitEmbed(title, currentBest, roll)],
+				components: [actionRow],
+			});
 
-    
+			const collector = message.createMessageComponentCollector({time: 15000});
 
-    
+			collector.on('collect', async i => {
+				if (i.user.id !== interaction.user.id) {
+					i.reply({content: 'This isn\'t your roll!', ephemeral: true});
+					return;
+				}
 
-    
+				if (i.customId === ACCEPT_BUTTON_ID) {
+					collector.stop('accept');
+					return;
+				}
 
-    
+				if (i.customId === REROLL_BUTTON_ID) {
+					const {
+						rerollResult,
+						criticalReroll,
+						reroll,
+					} = extraTraitReroll(commandName, trait, modifier, currentBest);
 
-    
+					if (criticalReroll) {
+						collector.stop('critical-failure');
+						return;
+					}
 
-    
+					try {
+						await i.update({
+							content: `Rerolled ${++rerolled} times!`,
+							embeds: [
+								createTraitEmbed(
+									title,
+									rerollResult,
+									reroll,
+									undefined,
+									currentBest,
+								),
+							],
+							components: [actionRow],
+						});
 
-    
+						currentBest = rerollResult;
+					} catch (err) {
+						error(commandName, 'Error updating interaction', err);
+						collector.stop('error');
+					}
+				}
+			});
 
-    
+			collector.on('end', async (collected, reason) => {
+				log(commandName, 'collector end', {reason, collected});
 
-    
+				if (reason === 'critical-failure') {
+					await message.interaction.editReply({
+						embeds: [createTraitResultEmbed(`${nickname} critically failed!`, 1)],
+						components: [],
+					});
 
-    
+					return;
+				}
 
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="commands_extra.js.html">commands/extra.js</a>, <a href="commands_extra.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+				message.interaction.editReply({
+					content: `Final result (rerolled ${rerolled} times)!`,
+					embeds: [
+						createMeleeResultEmbed(
+							`${nickname}'s extra melee roll!`,
+							currentBest,
+							parry,
+						),
+					],
+					components: [],
+				});
+			});
+		} catch (err) {
+			error(commandName, 'error replying to interaction', err);
+		}
+	},
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

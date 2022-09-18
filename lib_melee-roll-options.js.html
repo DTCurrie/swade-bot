@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>extra - Documentation</title>
+    <title>lib/melee-roll-options.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,128 +29,45 @@
 
 <div id="main">
     
-    <h1 class="page-title">extra</h1>
+    <h1 class="page-title">lib/melee-roll-options.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A module containing helper functions for common melee roll options for the bot.
+ * @module melee-roll-options
+ */
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>A module for creating the <code>/extra</code> command for the bot.</p></div>
-        
+/**
+ * Gets the parry option for melee rolls
+ * @param {CommandInteraction} interaction The slash command interaction for the melee roll
+ * @returns {number} The provided parry value
+ */
+function getParryOption(interaction) {
+	return interaction.options.getInteger('parry') || 2;
+}
 
-        
-            
-<div class="section-method">
+/**
+ * Adds a parry option to a melee roll slash command
+ * @param {SlashCommandStringOption} option The slash command interaction options
+ * @returns {void}
+ */
+function setParryOption(option) {
+	return option
+		.setName('parry')
+		.setDescription('The parry value for your target (2 plus half their Fighting die type.) Defaults to 2.');
+}
 
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="commands_extra.js.html">commands/extra.js</a>, <a href="commands_extra.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = {getParryOption, setParryOption};
+</code></pre>
+        </article>
+    </section>
 
 
 

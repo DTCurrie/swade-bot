@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>extra - Documentation</title>
+    <title>lib/accept-button.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,128 +29,46 @@
 
 <div id="main">
     
-    <h1 class="page-title">extra</h1>
+    <h1 class="page-title">lib/accept-button.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A module for creating accept buttons for roll embeds.
+ * @module accept-button
+ */
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>A module for creating the <code>/extra</code> command for the bot.</p></div>
-        
+const {ButtonBuilder, ButtonStyle} = require('discord.js');
 
-        
-            
-<div class="section-method">
+/**
+ * The ID for identifying reroll button interactions
+ */
+const ACCEPT_BUTTON_ID = 'accept';
 
+/**
+ * The reroll button with a custom id of {rerollButtonId}
+ * @returns {ButtonBuilder}
+ */
+function createAcceptButton() {
+	return new ButtonBuilder()
+		.setCustomId(ACCEPT_BUTTON_ID)
+		.setLabel('Accept')
+		.setStyle(ButtonStyle.Success);
+}
 
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="commands_extra.js.html">commands/extra.js</a>, <a href="commands_extra.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = {
+	ACCEPT_BUTTON_ID,
+	createAcceptButton,
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

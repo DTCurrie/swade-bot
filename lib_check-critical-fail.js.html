@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>extra - Documentation</title>
+    <title>lib/check-critical-fail.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,128 +29,39 @@
 
 <div id="main">
     
-    <h1 class="page-title">extra</h1>
+    <h1 class="page-title">lib/check-critical-fail.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A module for checking rolls for critical failures.
+ * @module check-critical-fail
+ */
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>A module for creating the <code>/extra</code> command for the bot.</p></div>
-        
+/**
+ *
+ * @param {DiceRoll} traitRoll The trait roll
+ * @param {DiceRoll} [wildCardRoll] The wild card roll (optional)
+ * @returns {boolean} If the roll was a critical failure
+ */
+function checkCriticalFail(traitRoll, wildCardRoll) {
+	if (!wildCardRoll) {
+		return traitRoll.rolls[0].rolls[0].initialValue === 1;
+	}
 
-        
-            
-<div class="section-method">
+	return traitRoll.rolls[0].rolls[0].initialValue === 1 &amp;&amp; wildCardRoll.rolls[0].rolls[0].initialValue === 1;
+}
 
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="commands_extra.js.html">commands/extra.js</a>, <a href="commands_extra.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = {checkCriticalFail};
+</code></pre>
+        </article>
+    </section>
 
 
 

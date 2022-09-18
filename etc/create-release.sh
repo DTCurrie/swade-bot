@@ -55,6 +55,8 @@ usage() {
     exit 1
 }
 
+dry=false
+
 while getopts t:d: flag
 do
     echo "flag: $flag ${OPTARG}"

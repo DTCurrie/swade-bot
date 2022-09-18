@@ -1,6 +1,6 @@
 /**
- * A module for creating the `/wild` command for the bot.
- * @module wild
+ * A module for creating the `/melee` command for the bot.
+ * @module melee
  */
 
 const {
@@ -14,22 +14,25 @@ const {createTraitResultEmbed} = require('../embeds/trait-result');
 const {setTraitOption, setModifierOption, setNicknameOption, getTraitRollOptions} = require('../lib/trait-roll-options');
 const {wildCardTraitRoll, wildCardTraitReroll} = require('../lib/rolls');
 const {createTraitEmbed} = require('../embeds/trait');
+const {createMeleeResultEmbed} = require('../embeds/melee-result');
 const {createRerollButton, REROLL_BUTTON_ID} = require('../lib/reroll-button');
-const {ACCEPT_BUTTON_ID, createAcceptButton} = require('../lib/accept-button');
+const {setParryOption, getParryOption} = require('../lib/melee-roll-options');
+const {createAcceptButton, ACCEPT_BUTTON_ID} = require('../lib/accept-button');
 
-const commandName = createCommandName('wild');
+const commandName = createCommandName('melee');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName(commandName)
-		.setDescription('Makes a wild card roll by adding an exploding d6!')
+		.setDescription('Makes a wild card melee roll by adding an exploding d6!')
 		.addIntegerOption(setTraitOption)
 		.addStringOption(setModifierOption)
+		.addIntegerOption(setParryOption)
 		.addStringOption(setNicknameOption),
 	async execute(interaction) {
 		const {trait, modifier, nickname} = getTraitRollOptions(interaction);
-		const title = `${nickname}'s wild card roll`;
-
+		const parry = getParryOption(interaction);
+		const title = `${nickname}'s wild card melee roll`;
 		let rerolled = 0;
 
 		try {
@@ -49,6 +52,7 @@ module.exports = {
 			}
 
 			let currentBest = result;
+
 			const actionRow = new ActionRowBuilder().addComponents(
 				createRerollButton(),
 				createAcceptButton(),
@@ -116,12 +120,19 @@ module.exports = {
 						embeds: [createTraitResultEmbed(`${nickname} critically failed!`, 1)],
 						components: [],
 					});
+
 					return;
 				}
 
 				message.interaction.editReply({
 					content: `Final result (rerolled ${rerolled} times)!`,
-					embeds: [createTraitResultEmbed(`${nickname}'s wild card roll!`, currentBest)],
+					embeds: [
+						createMeleeResultEmbed(
+							`${nickname}'s wild card melee roll!`,
+							currentBest,
+							parry,
+						),
+					],
 					components: [],
 				});
 			});

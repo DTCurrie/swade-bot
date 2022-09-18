@@ -36,3 +36,5 @@ Then follow these steps:
 4. Development commands will have a `-dev` suffix and will be deployed to the server you used for the `guildId` in `config.json`
 5. Log messages are outputted to the terminal `console`
 6. Commands will not become global until the next release
+
+It is recommended you use vscode, project settings are committed in the `.vscode` directory to assist with development.

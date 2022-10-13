@@ -13,6 +13,8 @@ Currently supports:
 - `/wild` wild card rolls with re-rolling and critical failures
 - `/extra` extra rolls with re-rolling and critical failures
 - `/roll` standard dice rolls with re-rolling
+- `/melee` wild card melee attack
+- `/extra-melee` standard melee attack
 
 Invite the bot to your server using [this link](https://discord.com/api/oauth2/authorize?client_id=1017897656481230969&scope=applications.commands)!
 

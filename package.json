@@ -29,7 +29,7 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
-    "jsdoc": "^3.6.11",
+    "jsdoc": "^4.0.2",
     "minami": "^1.2.3",
     "npm-watch": "^0.11.0",
     "serve": "^14.0.1"
